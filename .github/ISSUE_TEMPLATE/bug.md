@@ -1,7 +1,7 @@
 ---
 name: Bug
 about: Create a bug report to help us improve
-title: "[Front] "
+title: "[Back] "
 labels: bug
 assignees: ''
 
@@ -21,7 +21,6 @@ Tell us what happens instead. Provide screenshots if relevant.
 
 ## Environment
  - OS: [e.g. Windows]
- - Browser: [e.g. Chrome 103.0.5060.66, Firefox 102.0]
  - Version: [e.g. 1.2]
 
 ## Additional context

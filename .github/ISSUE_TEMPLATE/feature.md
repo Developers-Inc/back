@@ -1,8 +1,8 @@
 ---
 name: Feature
 about: Suggest a feature for this project
-title: "[Front] "
-labels: enhancement
+title: "[Back] "
+labels: ''
 assignees: ''
 
 ---
