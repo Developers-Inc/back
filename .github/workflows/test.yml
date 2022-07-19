@@ -19,10 +19,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Use JDK ${{ jdk-version }}
+      - name: Use JDK ${{ matrix.jdk-version }}
         uses: actions/setup-java@v3.4.1
         with:
-          java-version: ${{ jdk-version }}
+          java-version: ${{ matrix.jdk-version }}
           
       - name: Build with Maven
         run: mvn -B package --file pom.xml
