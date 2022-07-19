@@ -22,6 +22,7 @@ jobs:
       - name: Use JDK ${{ matrix.jdk-version }}
         uses: actions/setup-java@v3.4.1
         with:
+          distribution: 'microsoft'
           java-version: ${{ matrix.jdk-version }}
           
       - name: Build with Maven
