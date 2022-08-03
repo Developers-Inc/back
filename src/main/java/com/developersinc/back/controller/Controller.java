@@ -10,6 +10,7 @@ public class Controller {
     @CrossOrigin("*")
     @GetMapping("/api/test")
     public String test() {
-        return "hello world from back-end!";
+        return "Hello world from back-end!";
+
     }
 }
