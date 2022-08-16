@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin("*")
     @GetMapping("/api/test")
     public String test() {
-        return "Hello world!!!";
+        return "Hello world from back-end!";
     }
 }
