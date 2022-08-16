@@ -11,6 +11,5 @@ public class Controller {
     @GetMapping("/api/test")
     public String test() {
         return "Hello world from back-end!";
-
     }
 }

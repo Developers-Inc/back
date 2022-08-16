@@ -1,0 +1,37 @@
+name: Test
+
+# Controls when the workflow will run
+on: [push, workflow_dispatch]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "Test"
+  Test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        jdk-version: [17]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      - name: Use JDK ${{ matrix.jdk-version }}
+        uses: actions/setup-java@v3.4.1
+        with:
+          distribution: 'microsoft'
+          java-version: ${{ matrix.jdk-version }}
+          
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+          
+      - name: Build Project and Run Unit Tests
+        run: mvn -B package
