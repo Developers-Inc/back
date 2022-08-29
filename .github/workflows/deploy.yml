@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: sa-east-1
-  ECR_REPOSITORY: developersinc-back
+  ECR_REPOSITORY: r9h2g2c9/back
   ECS_SERVICE: DevelopersIncService
   ECS_CLUSTER: DevelopersIncCluster
   ECS_TASK_DEFINITION: DevelopersIncTaskDefinition
