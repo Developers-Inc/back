@@ -15,8 +15,8 @@ env:
   CONTAINER_NAME: DevelopersIncBackContainer
   
 jobs:
-  deploy:
-    name: Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
     environment: production
     strategy:
@@ -67,7 +67,17 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-      
+          
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    strategy:
+      matrix:
+        jdk-version: [17]
+
+    steps:
       - name: Configure AWS credentials for ECS
         uses: aws-actions/configure-aws-credentials@v1
         with:
