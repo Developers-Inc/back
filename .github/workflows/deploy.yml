@@ -7,8 +7,8 @@ on:
 
 env:
   AWS_REGION: sa-east-1
+  ECR_REGISTRY: public.ecr.aws
   ECR_REPOSITORY: r9h2g2c9/back
-  ECR_URI: public.ecr.aws/r9h2g2c9/back
   ECS_SERVICE: DevelopersIncService
   ECS_CLUSTER: DevelopersIncCluster
   ECS_TASK_DEFINITION: DevelopersIncTaskDefinition
@@ -60,8 +60,6 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
@@ -86,12 +84,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registry-type: public
-      
       - name: Download task definition
         run: |
           mkdir .aws
@@ -100,8 +92,6 @@ jobs:
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION_FILE }}
