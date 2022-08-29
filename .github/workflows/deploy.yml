@@ -77,6 +77,8 @@ jobs:
       
       - name: Download task definition
         run: |
+          mkdir .aws
+          touch .aws/task-definition.json
           aws ecs describe-task-definition --task-definition DevelopersIncTaskDefinition --query taskDefinition > .aws/task-definition.json
 
       - name: Fill in the new image ID in the Amazon ECS task definition
